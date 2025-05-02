@@ -23,6 +23,6 @@ function deleteCard(cardElement) {
 // @todo: Вывести карточки на страницу
 const placesList = document.querySelector('.places__list');
 initialCards.forEach((item) =>{
-  const cardElement = createCard(item, deleteCard);
+  const cardElement = createCard(item);
   placesList.append(cardElement);
 });
