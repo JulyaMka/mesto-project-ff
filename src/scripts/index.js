@@ -1,10 +1,6 @@
 import "../pages/index.css";
 import { initialCards } from "./cards.js";
-import {
-  createCard,
-  handleLikeClick,
-  closePopupEsc,
-} from "../components/card.js";
+import { createCard, handleLikeClick } from "../components/card.js";
 import {
   closePopup,
   openPopup,
@@ -27,15 +23,13 @@ initialCards.forEach((item) => {
 
 //вызов открытия с разными попапами
 buttonPopupEditProfile.addEventListener("click", () => {
-  openPopup(popupEditProfile);
-  document.addEventListener("keydown", closePopupEsc); //добавление слушателя на esc
+  openPopup(popupEditProfile); //добавление слушателя на esc
   //Для информации со странички в форму редактирования
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 });
 buttonPopupAddProfile.addEventListener("click", () => {
   openPopup(popupAddProfile);
-  document.addEventListener("keydown", closePopupEsc); //добавление слушателя на esc
 });
 
 //вызов закрытия по кнопке и оверлею
@@ -60,7 +54,7 @@ function handleEditFormSubmit(evt) {
   const descriptionValue = jobInput.value;
   nameProfile.textContent = nameValue;
   jobProfile.textContent = descriptionValue;
-  popupEditProfile.classList.remove("popup_is-opened"); //закрытие попапа при нажатии сохранить
+  closePopup(popupEditProfile); //закрытие попапа при нажатии сохранить
 }
 popupEditProfile.addEventListener("submit", handleEditFormSubmit);
 
@@ -79,8 +73,7 @@ function addCard(evt) {
   };
   const cardElement = createCard(objectCard);
   placesList.prepend(cardElement);
-  nameCardInput.value = "";
-  urlCardInput.value = "";
+  evt.target.reset();
 
   popupAddProfile.classList.remove("popup_is-opened");
 }
@@ -97,5 +90,4 @@ export function handleImageClick(card) {
   popupCaption.textContent = card.name;
 
   openPopup(popupTypeImage);
-  document.addEventListener("keydown", closePopupEsc); //добавление слушателя на esc
 }

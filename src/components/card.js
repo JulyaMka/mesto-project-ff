@@ -1,6 +1,5 @@
 import { handleImageClick } from "../scripts/index.js";
-export { createCard, deleteCard, handleLikeClick, closePopupEsc };
-import { closePopup } from "../components/modal.js";
+import { closePopupEsc } from "../components/modal.js";
 
 function createCard(cardData) {
   //Темплейт карточки
@@ -8,14 +7,14 @@ function createCard(cardData) {
   const cardElement = cardTemplate
     .querySelector(".places__item")
     .cloneNode(true);
-  cardElement.querySelector(".card__image").src = cardData.link;
+  const imageElement = cardElement.querySelector(".card__image");
+  imageElement.src = cardData.link;
   cardElement.querySelector(".card__title").textContent = cardData.name;
-  cardElement.setAttribute("alt", cardData.name);
+  imageElement.setAttribute("alt", cardData.name);
 
   const deleteButton = cardElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => deleteCard(cardElement));
 
-  const imageElement = cardElement.querySelector(".card__image");
   imageElement.addEventListener("click", () => handleImageClick(cardData));
 
   return cardElement;
@@ -33,10 +32,4 @@ function handleLikeClick(evt) {
   }
 }
 
-//закрытие по escape
-function closePopupEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup.popup_is-opened");
-    closePopup(openedPopup);
-  }
-}
+export { createCard, deleteCard, handleLikeClick, closePopupEsc };
