@@ -5,7 +5,11 @@ import {
   handleLikeClick,
   closePopupEsc,
 } from "../components/card.js";
-import { closePopup, openPopup,closePopupButtonAndOverlay } from "../components/modal.js";
+import {
+  closePopup,
+  openPopup,
+  closePopupButtonAndOverlay,
+} from "../components/modal.js";
 
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const buttonPopupEditProfile = document.querySelector(".profile__edit-button");
@@ -25,6 +29,9 @@ initialCards.forEach((item) => {
 buttonPopupEditProfile.addEventListener("click", () => {
   openPopup(popupEditProfile);
   document.addEventListener("keydown", closePopupEsc); //добавление слушателя на esc
+  //Для информации со странички в форму редактирования
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
 });
 buttonPopupAddProfile.addEventListener("click", () => {
   openPopup(popupAddProfile);
@@ -33,14 +40,18 @@ buttonPopupAddProfile.addEventListener("click", () => {
 
 //вызов закрытия по кнопке и оверлею
 popups.forEach((popup) => {
-  popup.addEventListener("click", (evt)=> closePopupButtonAndOverlay(evt, popup));
+  popup.addEventListener("click", (evt) =>
+    closePopupButtonAndOverlay(evt, popup)
+  );
 });
 
 // Находим поля формы в DOM
 const nameProfile = document.querySelector(".profile__title");
 const jobProfile = document.querySelector(".profile__description");
 const nameInput = popupEditProfile.querySelector(".popup__input_type_name");
-const jobInput = popupEditProfile.querySelector(".popup__input_type_description");
+const jobInput = popupEditProfile.querySelector(
+  ".popup__input_type_description"
+);
 function handleEditFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
@@ -51,13 +62,12 @@ function handleEditFormSubmit(evt) {
   jobProfile.textContent = descriptionValue;
   popupEditProfile.classList.remove("popup_is-opened"); //закрытие попапа при нажатии сохранить
 }
-//для информации со странички в попап редактирования профиля
-nameInput.value = nameProfile.textContent;
-jobInput.value = jobProfile.textContent;
 popupEditProfile.addEventListener("submit", handleEditFormSubmit);
 
 //функция создания новой карточки
-const nameCardInput = popupAddProfile.querySelector(".popup__input_type_card-name");
+const nameCardInput = popupAddProfile.querySelector(
+  ".popup__input_type_card-name"
+);
 const urlCardInput = popupAddProfile.querySelector(".popup__input_type_url");
 function addCard(evt) {
   evt.preventDefault();
@@ -78,7 +88,6 @@ function addCard(evt) {
 const formAddCard = popupAddProfile.querySelector(".popup__form"); // Форма добавления карточек
 formAddCard.addEventListener("submit", addCard); // Правильный обработчи
 placesList.addEventListener("click", handleLikeClick);
-
 
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
