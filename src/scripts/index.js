@@ -17,7 +17,7 @@ const popupTypeImage = document.querySelector(".popup_type_image");
 //Вывести карточки на страницу
 const placesList = document.querySelector(".places__list");
 initialCards.forEach((item) => {
-  const cardElement = createCard(item);
+  const cardElement = createCard(item, handleImageClick);
   placesList.append(cardElement);
 });
 
@@ -71,11 +71,11 @@ function addCard(evt) {
     name: nameValue,
     link: urlValue,
   };
-  const cardElement = createCard(objectCard);
+  const cardElement = createCard(objectCard, handleImageClick);
   placesList.prepend(cardElement);
   evt.target.reset();
 
-  popupAddProfile.classList.remove("popup_is-opened");
+  closePopup(popupAddProfile);
 }
 
 const formAddCard = popupAddProfile.querySelector(".popup__form"); // Форма добавления карточек
@@ -84,7 +84,8 @@ placesList.addEventListener("click", handleLikeClick);
 
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
-export function handleImageClick(card) {
+
+function handleImageClick(card) {
   popupImage.src = card.link;
   popupImage.alt = card.name;
   popupCaption.textContent = card.name;

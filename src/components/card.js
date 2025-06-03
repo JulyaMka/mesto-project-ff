@@ -1,7 +1,4 @@
-import { handleImageClick } from "../scripts/index.js";
-import { closePopupEsc } from "../components/modal.js";
-
-function createCard(cardData) {
+function createCard(cardData, handleImageClick) {
   //Темплейт карточки
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
@@ -32,4 +29,4 @@ function handleLikeClick(evt) {
   }
 }
 
-export { createCard, deleteCard, handleLikeClick, closePopupEsc };
+export { createCard, deleteCard, handleLikeClick };
