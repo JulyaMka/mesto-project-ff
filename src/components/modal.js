@@ -6,6 +6,10 @@ function openPopup(popup) {
 
 //функция закрытия попапа
 function closePopup(popup) {
+  const form = popup.querySelector('.popup__form')
+  if (form){
+    form.reset();
+  }
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", closePopupEsc);
 }
