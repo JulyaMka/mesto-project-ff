@@ -52,11 +52,11 @@ const setEventListeners = (popupElement, settings) => {
 
 //функция перебора всех форм 
 const enableValidation = (settings) => {
-  const popupList = Array.from(
+  const formList = Array.from(
     document.querySelectorAll(settings.formSelector)
   );
 
-  popupList.forEach((popupElement) => {
+  formList.forEach((popupElement) => {
     setEventListeners(popupElement, settings);
   });
 };

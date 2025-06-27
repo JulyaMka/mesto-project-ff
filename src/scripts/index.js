@@ -14,6 +14,7 @@ import {
   addCard,
   updateAvatar,
 } from "./api.js";
+import { configEl } from "../utils/constants.js";
 
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const buttonPopupEditProfile = document.querySelector(".profile__edit-button");
@@ -24,15 +25,8 @@ const popupTypeImage = document.querySelector(".popup_type_image");
 const profileImage = document.querySelector(".profile__image");
 const profileContainer = document.querySelector(".profile__avatar-container");
 const popupTypeAvatar = document.querySelector(".popup_type_avatar");
+const avatarInput = popupTypeAvatar.querySelector(".popup__input_type_url-avatar");
 
-const configEl = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_inactive",
-  inputErrorClass: "popup__input_type_error",
-  errorClassActive: "popup__error_visible",
-};
 
 //Вывести карточки на страницу
 const placesList = document.querySelector(".places__list");
@@ -76,8 +70,6 @@ popups.forEach((popup) => {
     closePopupButtonAndOverlay(evt, popup)
   );
 });
-
-placesList.addEventListener("click", handleLikeClick);
 
 // Функция открытия картинки
 function handleImageClick(card) {
@@ -150,9 +142,7 @@ popupEditProfile.addEventListener("submit", function (evt) {
 //запрос обновления аватара
 popupTypeAvatar.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  const avatarValue = popupTypeAvatar.querySelector(
-    ".popup__input_type_url-avatar"
-  ).value;
+  const avatarValue = avatarInput.value;
   renderLoading(popupTypeAvatar, true, "Сохранение...");
   updateAvatar(avatarValue)
     .then((data) => {
